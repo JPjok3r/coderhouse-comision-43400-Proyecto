@@ -67,5 +67,5 @@ class CartManager{
     }
 }
 
-const cartManager = new CartManager(__dirname + 'carrito.json');
+const cartManager = new CartManager(__dirname + '/carrito.json');
 export default cartManager;

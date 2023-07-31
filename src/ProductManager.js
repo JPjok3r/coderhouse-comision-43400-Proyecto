@@ -21,7 +21,12 @@ class ProductsManager{
 
     async addProduct(prodObj) {
         try {
+            const { code } = prodObj;
             const arrProdAnt = await this.getProducts();
+            console.log(code);
+            if(arrProdAnt.find(prod => prod.code === code)){
+                return {message: 'No se puede agragar el producto, el código que ingresó ya existe'};
+            }
             let id = !arrProdAnt.length ? 1 : arrProdAnt[arrProdAnt.length-1].id + 1;
             arrProdAnt.push({...prodObj, id});
             await fs.promises.writeFile(this.path, JSON.stringify(arrProdAnt));
@@ -76,5 +81,5 @@ class ProductsManager{
     }
 }
 
-const productManager = new ProductsManager(__dirname + 'products.json');
+const productManager = new ProductsManager(__dirname + '/products.json');
 export default productManager
