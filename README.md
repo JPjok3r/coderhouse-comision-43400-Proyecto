@@ -45,5 +45,4 @@ Para agregar productos, de igual manera con la pruebas que hice estan los archiv
 
 - [@JPjok3r](https://github.com/JPjok3r) Juan Pablo Saavedra Alanis
 
-Este es el URI de mongo para realizar las pruebas:
---- mongodb+srv://juanJok3r:Z2Ttdh9BvDMmUsrq@cluster0.wbph3er.mongodb.net/ecommerce?retryWrites=true&w=majority ---
+
