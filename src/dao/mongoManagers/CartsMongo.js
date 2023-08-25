@@ -42,7 +42,7 @@ class CartsMongo{
             if(products.lenght === 0){
                 products.push({product:idProduct, quantity: 1});
             } else{
-                let jAux = products.findIndex(p=>p.product===idProduct);
+                let jAux = products.findIndex(p => p.product.equals(idProduct));
                 jAux !== -1 ?  products[jAux].quantity++ : products.push({product: idProduct, quantity: 1});
             }
             console.log(products)
