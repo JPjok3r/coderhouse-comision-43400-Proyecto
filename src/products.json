@@ -6,7 +6,7 @@
       "price": 120,
       "status": true,
       "stock": 50,
-      "category": "pruebas",
+      "category": "Celulares",
       "thumbnails": [],
       "id": 1
     },
@@ -17,7 +17,7 @@
       "price": 130,
       "status": true,
       "stock": 60,
-      "category": "pruebas",
+      "category": "Celulares",
       "thumbnails": [],
       "id": 2
     },
@@ -28,7 +28,7 @@
       "price": 100,
       "status": true,
       "stock": 30,
-      "category": "pruebas",
+      "category": "Laptops",
       "thumbnails": [],
       "id": 3
     },
@@ -39,7 +39,7 @@
       "price": 1500,
       "status": true,
       "stock": 20,
-      "category": "pruebas",
+      "category": "Laptops",
       "thumbnails": [],
       "id": 4
     },
@@ -50,7 +50,7 @@
       "price": 900,
       "status": false,
       "stock": 10,
-      "category": "pruebas",
+      "category": "TV",
       "thumbnails": [],
       "id": 5
     },
@@ -61,7 +61,7 @@
       "price": 450,
       "status": false,
       "stock": 1,
-      "category": "pruebas",
+      "category": "Consolas",
       "thumbnails": [],
       "id": 6
     },
@@ -72,7 +72,7 @@
       "price": 1050,
       "status": true,
       "stock": 50,
-      "category": "pruebas",
+      "category": "Consolas",
       "thumbnails": [],
       "id": 7
     },
@@ -83,7 +83,7 @@
       "price": 500,
       "status": true,
       "stock": 40,
-      "category": "pruebas",
+      "category": "PC case",
       "thumbnails": [],
       "id": 8
     }

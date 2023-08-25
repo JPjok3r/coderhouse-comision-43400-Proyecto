@@ -1,12 +1,13 @@
 import { Router } from "express";
-import productManager from '../ProductManager.js';
+//import productManager from '../ProductManager.js';
+import { productsMongo } from '../dao/mongoManagers/ProductsMongo.js';
 
 const router = Router();
 
 router.get('/', async (req, res) => {
     const { limit } = req.query;
     try {
-        const products = await productManager.getProducts();
+        const products = await productsMongo.findAll();
         if(limit){
             const prodLimit = products.slice(0, +limit);
             res.status(200).json({message: 'Products', prodLimit});
@@ -21,8 +22,8 @@ router.get('/', async (req, res) => {
 router.get('/:pId', async (req, res) => {
     const { pId } = req.params;
     try {
-        const product = await productManager.getProductById(+pId);
-        if(typeof product === 'object')
+        const product = await productsMongo.findById(pId);
+        if(product.name)
             res.status(200).json({ message: `Product ${pId}`, product});
         else
             res.status(200).json({ message: `Error`, product});
@@ -38,14 +39,14 @@ router.post('/', async (req, res) => {
             const sendData = {
                 title,
                 description,
-                code,
                 price,
-                status,
+                code,
                 stock,
                 category,
+                status,
                 thumbnails
             }
-            const newProduct = await productManager.addProduct(sendData);
+            const newProduct = await productsMongo.createOne(sendData);
             res.json(newProduct);
         } else{
             res.status(400).json({message: 'Error, todos los campos son obligatorios.'})
@@ -58,7 +59,7 @@ router.post('/', async (req, res) => {
 router.put('/:pId', async (req, res) => {
     const { pId } = req.params;
     try {
-        const prodUpdated = await productManager.updateProduct(+pId, req.body);
+        const prodUpdated = await productsMongo.updateOne(pId, req.body);
         res.status(200).json({message: prodUpdated});
     } catch (error) {
         res.status(500).json({ error });
@@ -68,7 +69,7 @@ router.put('/:pId', async (req, res) => {
 router.delete('/:pId', async (req, res) => {
     const { pId } = req.params;
     try {
-        const resp = await productManager.deleteProduct(+pId);
+        const resp = await productsMongo.deleteOne(pId);
         res.status(200).json({message: resp});
     } catch (error) {
         res.status(500).json({ error });
