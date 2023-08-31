@@ -20,7 +20,7 @@ app.set("view engine", "handlebars");
 
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartsRouter);
-app.use('/api/chat', viewsRouter);
+app.use('/', viewsRouter);
 
 const httpServer = app.listen(8080, () => {
   console.log("Servidor en linea, escuchando en: 8080");

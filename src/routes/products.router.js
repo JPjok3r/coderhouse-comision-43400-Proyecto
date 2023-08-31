@@ -5,15 +5,9 @@ import { productsMongo } from '../dao/mongoManagers/ProductsMongo.js';
 const router = Router();
 
 router.get('/', async (req, res) => {
-    const { limit } = req.query;
     try {
-        const products = await productsMongo.findAll();
-        if(limit){
-            const prodLimit = products.slice(0, +limit);
-            res.status(200).json({message: 'Products', prodLimit});
-        } else{
-            res.status(200).json({message: 'Products', products});
-        }
+        const products = await productsMongo.findAll(req.query);
+        res.status(200).json({products});
     } catch (error) {
         res.status(500).json({error});
     }
@@ -23,7 +17,7 @@ router.get('/:pId', async (req, res) => {
     const { pId } = req.params;
     try {
         const product = await productsMongo.findById(pId);
-        if(product.name)
+        if(product)
             res.status(200).json({ message: `Product ${pId}`, product});
         else
             res.status(200).json({ message: `Error`, product});
