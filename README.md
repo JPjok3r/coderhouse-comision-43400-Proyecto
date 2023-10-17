@@ -25,22 +25,11 @@ Dejo un objeto de prueba si quieren tomarlo en cuenta.
 ```
 Para agregar productos, de igual manera con la pruebas que hice estan los archivos creados.
 
-#### Tengo un error, un problemita en el cart lo que es el agregar producto al carrito, intente de todo pero no entiendo porque me crea otro id dentro del objeto que esta de esta manera:
-```
-[
-  {
-    product: new ObjectId("64e7a4229dd893fecb4b3f65"),
-    quantity: 1,
-    _id: new ObjectId("64e7e907b48fc81a61c72b8e") --> este id no entiendo porque lo crea y creo que esta causando problemas, esto es en CartsMongo.js que esta en mongoManagers y usa el model cart.
-  },
-  {
-    product: new ObjectId("64e7a4229dd893fecb4b3f65"),
-    quantity: 1,
-    _id: new ObjectId("64e7e938b48fc81a61c72b94")
-  }
-]
-```
-#### Todo lo demas funciona espero que este bien.
+Tengo todo lo que pide la entrega pero no entiendo mucho lo de current o talvez lo mal entendí, no se si es correcto lo que realicé, ya lo veré con tu revisión. Lo que no le entiendo del todo el el middleware que trabaja con current, pero al final si funciona, restringe la entrada a los endpoints según el tipo de usuario.
+
+Otra duda, bueno más que duda inquietud, espero que el DTO este bien utilizado, ya que según lo visto en clase es para ingresar o sacar datos de la DB.
+
+Sin más que agregar espero tus correcciones y observaciones. Gracias.
 ## Autor
 
 - [@JPjok3r](https://github.com/JPjok3r) Juan Pablo Saavedra Alanis

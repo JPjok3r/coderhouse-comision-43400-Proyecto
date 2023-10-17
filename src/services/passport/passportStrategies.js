@@ -1,8 +1,8 @@
 import passport from 'passport';
-import { userModel } from '../../DAO/db/models/user.model.js';
+import { userModel } from '../../persistencia/DAO/db/models/user.model.js';
 import { Strategy as GithubStrategy } from 'passport-github2';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import { usersMongo } from '../../DAO/managers/UsersMongo.js';
+import { usersMongo } from '../../persistencia/DAO/managers/UsersMongo.js';
 
 passport.use(new GithubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,

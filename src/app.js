@@ -1,6 +1,6 @@
 import express from "express";
 import config from "./config.js";
-import "./DAO/db/dbConfig.js";
+import "./persistencia/DAO/db/dbConfig.js";
 import cookieParser from 'cookie-parser';
 import productRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
@@ -10,7 +10,7 @@ import viewsRouter from "./routes/views.router.js";
 import handlebars from 'express-handlebars';
 import { Server } from "socket.io";
 import { __dirname } from "./utils.js";
-import { chatMongo } from "./DAO/managers/ChatMongo.js";  //Va a cambiar
+import { chatMongo } from "./persistencia/DAO/managers/ChatMongo.js";  //Va a cambiar
 import session from 'express-session';
 import mongoStore from 'connect-mongo';
 import passport from 'passport';
