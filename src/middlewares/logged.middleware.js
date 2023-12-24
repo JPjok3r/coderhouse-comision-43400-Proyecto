@@ -3,7 +3,7 @@ import { sessionService } from "../services/session.service.js";
 export const isLogged = (req, res, next) => {
     if(!req.session.user){
         return res.redirect('/');
-    }
+    } 
     next();
 }
 
@@ -15,7 +15,7 @@ export const authUserMiddleware = roles => {
             return res.status(401).json({message: 'No existe una sesion, debe autenticarse.'});
         } else{
             const userVerify = await sessionService.currentSession(req.session.user.email);
-            if(!roles.includes(userVerify.role)){
+            if(roles.includes(userVerify.role)){
                 return res.status(401).json({message: 'No esta autorizado a ingresar en esta ruta.'});
             }
             next();
@@ -27,7 +27,7 @@ export const authAdminMiddleware = (req, res, next) => {
     if(!req.session.user){
         return res.status(401).json({message: 'No existe una sesion, debe autenticarse.'});
     } else{
-        if(req.session.user.rol !== "Admin"){
+        if(req.session.user.rol !== "admin" && req.session.user.rol !== "premium"){
             return res.status(401).json({message: 'No esta autorizado a ingresar en esta ruta.'});
         }
         next();

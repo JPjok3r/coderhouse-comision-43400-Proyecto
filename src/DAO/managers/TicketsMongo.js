@@ -1,7 +1,12 @@
+import BasicMongo from "./BasicMongo.js";
 import { ticketModel } from "../db/models/ticket.model.js";
 
-class TicketMongo{
-    async createTicket(data){
+class TicketMongo extends BasicMongo{
+    constructor(){
+        super(ticketModel);
+    }
+
+    /* async createTicket(data){
         try {
             const newTicket = await ticketModel.create(data);
             return newTicket;
@@ -17,7 +22,7 @@ class TicketMongo{
         } catch (error) {
             return error;
         }
-    }
+    } */
 }
 
 export const ticketMongo = new TicketMongo();

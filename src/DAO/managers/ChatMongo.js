@@ -1,7 +1,12 @@
+import BasicMongo from "./BasicMongo.js";
 import { messagesModel } from "../db/models/messages.model.js";
 
-class ChatMongo{
-    async findAll(){
+class ChatMongo extends BasicMongo{
+    constructor() {
+        super(messagesModel);
+    }
+
+   /*  async findAll(){
         try {
             const messages = await messagesModel.find({});
             return messages;
@@ -17,7 +22,7 @@ class ChatMongo{
         } catch (error) {
             return error;
         }
-    }
+    } */
 }
 
 export const chatMongo = new ChatMongo();

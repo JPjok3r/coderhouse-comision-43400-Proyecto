@@ -1,8 +1,8 @@
 import passport from 'passport';
-import { userModel } from '../../persistencia/DAO/db/models/user.model.js';
+import { userModel } from '../../DAO/db/models/user.model.js';
 import { Strategy as GithubStrategy } from 'passport-github2';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import { usersMongo } from '../../persistencia/DAO/managers/UsersMongo.js';
+import { usersMongo } from '../../DAO/managers/UsersMongo.js';
 
 passport.use(new GithubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
@@ -11,7 +11,7 @@ passport.use(new GithubStrategy({
     },
     async function(accessToken, refreshToken, profile, done){
         try {
-            const userInDB = await usersMongo.findOne(profile._json.email);
+            const userInDB = await usersMongo.getByEmail(profile._json.email);
             if(userInDB){
                 if(userInDB.fromGithub){
                     return done(null, userInDB);
@@ -29,7 +29,7 @@ passport.use(new GithubStrategy({
                 cart: cartUser.cart._id,
                 fromGithub: true
             }
-            const userGithub = await usersMongo.createUser(newUser);
+            const userGithub = await usersMongo.createOne(newUser);
             done(null, userGithub);
         } catch (error) {
             done(error);
@@ -44,7 +44,7 @@ passport.use(new GoogleStrategy({
     },
     async function(accessToken, refreshToken, profile, cb){
          try {
-            const userInDB = await usersMongo.findOne(profile._json.email);
+            const userInDB = await usersMongo.getByEmail(profile._json.email);
             if(userInDB){
                 if(userInDB.fromGithub){
                     return cb(null, userInDB);
@@ -62,7 +62,7 @@ passport.use(new GoogleStrategy({
                 cart: cartUser.cart._id,
                 fromGoogle: true
             }
-            const userGoogle = await usersMongo.createUser(newUser);
+            const userGoogle = await usersMongo.createOne(newUser);
             cb(null, userGoogle);
         } catch (error) {
             cb(error);

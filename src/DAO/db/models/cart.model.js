@@ -12,17 +12,7 @@ const prodRefSchema = new mongoose.Schema({
 
 const cartSchema = new mongoose.Schema({
   
-  products: [ prodRefSchema
-    /*{
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Products',
-      },
-      quantity: {
-        type: Number,
-      },
-    },*/
-  ],
+  products: [ prodRefSchema ],
 });
 
 export const cartModel = mongoose.model('Carts', cartSchema);

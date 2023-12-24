@@ -2,3 +2,15 @@
     width: 100px;
     height: 100px;
 }
+
+.navbar-brand img{
+    width: 150px;
+    height: 150px;
+}
+
+.btnPurchase {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}

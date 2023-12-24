@@ -1,13 +1,13 @@
-import { cartsMongo } from "../persistencia/DAO/managers/CartsMongo.js";
+import { cartsMongo } from "../DAO/managers/CartsMongo.js";
 
 class CartService{
     async getCartById(id) {
-        const cart = await cartsMongo.findById(id);
+        const cart = await cartsMongo.getById(id);
         return cart;
     }
     
     async createCarrito() {
-        const cart = await cartsMongo.createCart();
+        const cart = await cartsMongo.createOne({products: []});
         return cart;
     }
     
@@ -18,11 +18,12 @@ class CartService{
     
     async deleteProdFromCart(cid, pid) {
         const response = await cartsMongo.deleteProductFromCart(cid, pid);
-        return response;
+        return response; 
+        
     }
     
     async deleteCart(id) {
-        const response = await cartsMongo.deleteCart(id);
+        const response = await cartsMongo.deleteOne(id);
         return response;
     }
 }

@@ -1,6 +1,8 @@
 import { Router } from "express";
 import passport from "passport";
 import { userController } from "../controllers/users.controller.js";
+import { uploadDocument } from "../middlewares/multer.middleware.js";
+import { authAdminMiddleware } from "../middlewares/logged.middleware.js";
 
 const router = Router();
 
@@ -11,5 +13,12 @@ router.get("/github", passport.authenticate('github', { failureRedirect:'/' }), 
 router.get('/loginWithGoogle', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get("/googleAuth", passport.authenticate('google', { failureRedirect:'/' }), userController.googleAuth);
 router.get('/logout', userController.logout);
+router.post('/recoverPass', userController.recoverPass);
+router.post('/resetPass/:id', userController.resetPass);
+router.delete('/:uid', userController.deleteUser);
+router.put('/premium/:uid', userController.changeUserRole);
+router.post('/:uid/documents', uploadDocument.array('documents', 3), userController.documentsUpload);
+router.get('/', authAdminMiddleware, userController.getAllUsers);
+router.delete('/', authAdminMiddleware, userController.deleteInactiveUsers);
 
 export default router;

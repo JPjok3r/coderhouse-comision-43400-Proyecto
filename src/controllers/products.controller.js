@@ -27,7 +27,7 @@ class ProductController{
         const { title, description, code, price, status=true, stock, category, thumbnails=[] } = req.body;
         try {
             if(title && description && code && price && stock && category){
-                const sendData = {
+                let sendData = {
                     title,
                     description,
                     price,
@@ -37,7 +37,12 @@ class ProductController{
                     status,
                     thumbnails
                 }
+                if(req.session.user.rol === 'premium'){
+                    sendData = {...sendData, owner: req.session.user.email}
+                } 
                 const newProduct = await productService.create(sendData);
+                logger.http('Estado correcto, codigo 200');
+                logger.debug('Ejecucion valida');
                 res.status(200).json({message: "Producto creado exitosamente", product: newProduct});
             } else{
                 res.status(400).json({message: 'Error, todos los campos son obligatorios.'})
@@ -50,8 +55,13 @@ class ProductController{
     async updateProduct(req, res) {
         const { pId } = req.params;
         try {
-            const product = await productService.update(pId, req.body);
-            res.status(200).json({ message: product});
+        let product;
+            if(req.session.user.rol === 'premium'){
+                product = await productService.update(pId, req.body, req.session.user.email);
+            } else{
+                product = await productService.update(pId, req.body);
+            }
+            res.status(200).json({ message: product });
         } catch (error) {
             res.status(500).json({error});
         }
@@ -60,6 +70,11 @@ class ProductController{
     async delProduct(req, res) {
         const { pId } = req.params;
         try {
+            //let response;
+            //if(req.session.user.rol === 'premium'){
+            //    response = await productService.deleteProduct(pId, req.session.user.email);
+            //} else{
+            //}
             const response = await productService.deleteProduct(pId);
             res.status(200).json({ message: response });
         } catch (error) {
