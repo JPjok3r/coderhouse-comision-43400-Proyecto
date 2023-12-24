@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/', cartController.createCart);
 router.get('/:cid', cartController.getCart);
-router.put('/:cid/product/:pid', authUserMiddleware(["Admin"]), cartController.addProdToCart);
+router.put('/:cid/products/:pid', authUserMiddleware(["admin"]), cartController.addProdToCart);
 router.delete('/:cid/products/:pid', cartController.delProdInCart);
 router.delete('/:cid', cartController.delCart);
 router.get('/:cid/purchase', cartController.purchase);

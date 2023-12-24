@@ -30,6 +30,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "user"
     },
+    documents: [
+        {
+            name: String,
+            reference: String
+        }
+    ],
+    last_conection: {
+        status: String,
+        date_time: Date
+    },
     fromGithub: {
         type: Boolean,
         default: false
@@ -37,6 +47,13 @@ const userSchema = new mongoose.Schema({
     fromGoogle: {
         type: Boolean,
         default: false
+    },
+    recoveryPass: {
+        type: Boolean,
+        default: false
+    },
+    recoveryPassControl: {
+        type: String
     }
 });
 

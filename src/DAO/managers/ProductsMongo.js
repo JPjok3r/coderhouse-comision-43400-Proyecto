@@ -1,17 +1,12 @@
+import BasicMongo from "./BasicMongo.js";
 import { productModel } from "../db/models/product.model.js";
 
-class ProductsMongo {
+class ProductsMongo extends BasicMongo{
+    constructor() {
+        super(productModel)
+    }
 
-    /* async findAll(){
-        try {
-            const products = await productModel.find({});
-            return products;
-        } catch (error) {
-            return error;
-        }
-    } */
-
-    async findAll(obj){
+    async getAllPaginate(obj){
         const { limit, page, sortPrice, lean, ...query } = obj;
         let options;
         if(limit){
@@ -43,42 +38,6 @@ class ProductsMongo {
                     : null,
             }
             return info;
-        } catch (error) {
-            return error;
-        }
-    }
-
-    async createOne(obj){
-        try {
-            const newProduct = await productModel.create(obj);
-            return newProduct;
-        } catch (error) {
-            return error;
-        }
-    }
-
-    async findById(id){
-        try {
-            const product = await productModel.findById(id);
-            return product;
-        } catch (error) {
-            return error;
-        }
-    }
-
-    async updateOne(id, obj){
-        try {
-            const prodUpdated = await productModel.updateOne({_id:id},{...obj});
-            return prodUpdated
-        } catch (error) {
-            return error;
-        }
-    }
-
-    async deleteOne(id){
-        try {
-            const prodDeleted = await productModel.findByIdAndDelete(id);
-            return prodDeleted
         } catch (error) {
             return error;
         }

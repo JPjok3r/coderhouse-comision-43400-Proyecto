@@ -1,6 +1,6 @@
-<table className="table table-hover">
+<table class="table table-hover table-striped table-sm table-responsive">
     <thead>
-        <tr className="table-dark">
+        <tr class="table-dark">
             <th scope="col">#</th>
             <th scope="col">Item</th>
             <th scope="col">Cantidad</th>
@@ -9,21 +9,32 @@
     </thead>
     <tbody>
         {{#each doc.products}}
-            <tr className="table-active">
+            <tr class="table-active">
                 <th scope="row">{{@index}}</th>
                 <td>
                     <img class="cartTableImg card-img" src={{id.thumbnails}} alt={{id.title}} />
-                    <h5 className="">{{id.title}}</h5>
+                    <h5 class="">{{id.title}}</h5>
                 </td>
                 <td>
-                    <p className="card-text">{{quantity}}</p>
+                    <p class="card-text">{{quantity}}</p>
                 </td>
                 <td>
-                    <p className="card-text">
+                    <p class="card-text">
                         {{id.price}}
                     </p>
                 </td>
             </tr>
         {{/each}}
+        <tr class="table-active">
+
+        </tr>
     </tbody>
 </table>
+<div class="btnPurchase">    
+    <button type="button" class="btn btn-success purchaseBtn" id="purchase">Finalizar</button>
+    <input type="hidden" name="cartId" value="{{user.cart}}" id="cartId">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/purchase.js"></script>

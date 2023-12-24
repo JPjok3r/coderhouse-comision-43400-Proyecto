@@ -33,8 +33,13 @@ class CartController{
             const product = await productService.getById(pid);
             const cart = await cartService.getCartById(cid);
             if(product && cart){
+                if(req.session.user.rol === 'premium'){
+                    if(product.owner === req.session.user.email){
+                        return res.status(401).json({ message: 'Usted no puede agregar este producto', product});
+                    }
+                } 
                 const msg = await cartService.addProductToCart(cid, pid, cant);
-                res.status(200).json({ message: msg});
+                res.status(200).json({ message: msg, op: "success"});
             } else{
                 res.status(200).json({ message: "Carrito o producto inexistentes, no es posible realizar la operacion." });
             }
@@ -84,9 +89,9 @@ class CartController{
             const nticket = await ticketService.createTicket(amount, userEmail);
             if(amount > 0 && nticket){
                 if(productsNoAv.length !== 0){
-                    res.status(200).json({ticket:nticket, productsUnavailable: productsNoAv});
+                    res.status(200).json({ticket:nticket, productsUnavailable: productsNoAv, opSuccess: true});
                 } else{
-                    res.status(200).json({ticket:nticket});
+                    res.status(200).json({ticket:nticket, opSuccess: true});
                 }
             } else{
                 res.status(200).json({productsUnavailable: productsNoAv});
